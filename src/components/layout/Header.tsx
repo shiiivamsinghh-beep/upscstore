@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu } from 'lucide-react';
+import { ShoppingCart, Search, Menu, BookOpen } from 'lucide-react';
 import { CartCounter } from '@/components/cart/CartCounter';
 
 export function Header() {
@@ -8,11 +8,10 @@ export function Header() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 {/* Mobile Menu & Logo */}
                 <div className="flex items-center gap-4">
-                    <button className="md:hidden text-muted-foreground hover:text-foreground">
-                        <Menu className="h-6 w-6" />
-                    </button>
+                    {/* Hamburger removed as we have bottom nav */}
                     <Link href="/" className="flex items-center gap-2">
-                        <span className="text-xl font-bold tracking-tight text-primary">UPSC Store</span>
+                        <BookOpen className="h-6 w-6 text-primary" />
+                        <span className="text-xl font-bold tracking-tight text-foreground">UPSC Store</span>
                     </Link>
                 </div>
 
@@ -28,7 +27,8 @@ export function Header() {
                     <button className="text-muted-foreground hover:text-foreground">
                         <Search className="h-5 w-5" />
                     </button>
-                    <Link href="/cart" className="relative text-muted-foreground hover:text-foreground transition-colors hover:text-primary">
+                    {/* Cart: Hidden on mobile, visible on desktop */}
+                    <Link href="/cart" className="hidden md:flex relative text-muted-foreground hover:text-foreground transition-colors hover:text-primary">
                         <ShoppingCart className="h-5 w-5" />
                         <CartCounter />
                     </Link>
