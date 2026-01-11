@@ -14,13 +14,14 @@ export function Header() {
     const searchInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
 
+    // Focus mobile search when toggled
     useEffect(() => {
         if (isSearchOpen && searchInputRef.current) {
             searchInputRef.current.focus();
         }
     }, [isSearchOpen]);
 
-    // Prevent scrolling when menu is open
+    // Lock body scroll for mobile menu
     useEffect(() => {
         if (isMobileMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -34,7 +35,7 @@ export function Header() {
         e.preventDefault();
         if (searchQuery.trim()) {
             router.push(`/?search=${encodeURIComponent(searchQuery)}`);
-            setIsSearchOpen(false);
+            setIsSearchOpen(false); // Close mobile search if open
         }
     };
 
@@ -47,80 +48,103 @@ export function Header() {
 
     return (
         <>
-            <header className="sticky top-0 z-50 w-full glass">
-                <div className="container mx-auto flex h-16 items-center justify-between px-4">
-                    {/* Mobile Menu & Logo */}
-                    <div className="flex items-center gap-4">
+            {/* 
+              Desktop: Solid White Background, High Utility
+              Mobile: Glass/Solid Hybrid 
+            */}
+            <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+                <div className="container mx-auto flex h-16 items-center gap-4 px-4 justify-between md:justify-start">
+
+                    {/* --- LEFT: Logo & Mobile Trigger --- */}
+                    <div className="flex items-center gap-2 md:gap-4 shrink-0">
+                        {/* Mobile Menu Trigger */}
                         <button
-                            className="md:hidden -ml-2 p-2 text-muted-foreground hover:text-foreground"
+                            className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground"
                             onClick={() => setIsMobileMenuOpen(true)}
                         >
                             <Menu className="h-6 w-6" />
                         </button>
 
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <BookOpen className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
-                            <span className="text-xl font-bold tracking-tight text-foreground font-heading">UPSC Store</span>
+                        <Link href="/" className="flex items-center gap-2">
+                            <BookOpen className="h-6 w-6 text-primary" />
+                            <span className="text-xl font-bold tracking-tight text-foreground font-heading hidden sm:inline-block">UPSC Store</span>
+                            <span className="text-xl font-bold tracking-tight text-foreground font-heading sm:hidden">UPSC</span>
                         </Link>
                     </div>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-                        {navLinks.slice(0, 3).map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="relative group py-1 transition-colors hover:text-primary"
-                            >
-                                {link.name}
-                                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Actions */}
-                    <div className="flex items-center gap-4">
-                        {/* Desktop Expandable Search */}
-                        <div className="hidden md:flex items-center">
-                            <form
-                                onSubmit={handleSearch}
-                                className={cn(
-                                    "flex items-center overflow-hidden transition-all duration-300 ease-in-out",
-                                    isSearchOpen ? "w-64" : "w-0"
-                                )}
-                            >
-                                <input
-                                    ref={searchInputRef}
-                                    type="text"
-                                    placeholder="Search notes..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full h-9 bg-muted/50 border-none rounded-l-full px-4 text-sm focus:outline-none focus:ring-0"
-                                />
-                            </form>
+                    {/* --- CENTER: Search Bar (Desktop Only) --- */}
+                    <div className="hidden md:flex flex-1 max-w-2xl mx-auto px-6">
+                        <form
+                            onSubmit={handleSearch}
+                            className="relative w-full flex items-center"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Search for notes, books, test series..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full h-10 pl-4 pr-10 rounded-lg border border-input bg-muted/40 hover:bg-muted/60 focus:bg-background focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+                            />
                             <button
-                                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                className={cn(
-                                    "h-9 w-9 flex items-center justify-center rounded-full transition-colors hover:bg-muted",
-                                    isSearchOpen && "bg-muted text-primary"
-                                )}
+                                type="submit"
+                                className="absolute right-0 top-0 h-10 w-10 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                             >
-                                {isSearchOpen ? <X className="h-4 w-4" /> : <Search className="h-5 w-5 text-muted-foreground hover:text-foreground" />}
+                                <Search className="h-4 w-4" />
                             </button>
-                        </div>
+                        </form>
+                    </div>
 
-                        {/* Mobile Search Trigger */}
-                        <button className="md:hidden h-11 w-11 flex items-center justify-center rounded-full hover:bg-muted active:scale-95 text-muted-foreground hover:text-foreground">
+                    {/* --- RIGHT: Actions & Desktop Nav Links --- */}
+                    <div className="flex items-center gap-4 shrink-0">
+
+                        {/* Desktop Nav Links (Short) */}
+                        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground mr-2">
+                            {navLinks.slice(0, 3).map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="hover:text-primary transition-colors"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        {/* Mobile Search Button */}
+                        <button
+                            className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                        >
                             <Search className="h-5 w-5" />
                         </button>
 
-                        {/* Cart: Hidden on mobile, visible on desktop */}
-                        <Link href="/cart" className="hidden md:flex relative text-muted-foreground hover:text-foreground transition-all hover:scale-105 hover:text-primary">
-                            <ShoppingCart className="h-5 w-5" />
-                            <CartCounter />
+                        {/* Cart */}
+                        <Link href="/cart" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all hover:scale-105 group">
+                            <div className="relative">
+                                <ShoppingCart className="h-6 w-6 group-hover:text-primary transition-colors" />
+                                <CartCounter />
+                            </div>
+                            <span className="hidden lg:block text-sm font-medium group-hover:text-primary">Cart</span>
                         </Link>
                     </div>
                 </div>
+
+                {/* Mobile Search Bar (Expandable) */}
+                {isSearchOpen && (
+                    <div className="md:hidden border-t px-4 py-3 bg-background/95 backdrop-blur animate-in slide-in-from-top-1">
+                        <form onSubmit={handleSearch} className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full h-10 pl-9 pr-4 rounded-md border border-input bg-muted text-sm"
+                            />
+                        </form>
+                    </div>
+                )}
             </header>
 
             {/* Mobile Menu Overlay */}
