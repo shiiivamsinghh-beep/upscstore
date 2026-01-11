@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, CheckCircle2, Truck, ShieldCheck } from 'lucide-react';
 import { ProductCard } from '@/components/products/ProductCard';
 import { supabase } from '@/lib/supabase';
@@ -27,37 +28,38 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
   return (
     <div className="flex flex-col gap-12 pb-12">
       {/* Hero Section */}
-      <section className="relative bg-[#0f172a] py-16 md:py-24 text-white overflow-hidden">
-        {/* Abstract Pattern Background */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-
-        <div className="container mx-auto px-4 relative z-10 text-center md:text-left md:flex md:items-center md:justify-between">
-          <div className="max-w-2xl mx-auto md:mx-0">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6 leading-tight">
-              Premium UPSC Material.<br />
+      <section className="relative bg-primary py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=2000"
+            alt="Background"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <div className="mx-auto max-w-3xl space-y-6">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+              Premium UPSC Material. <br className="hidden md:block" />
               <span className="text-secondary">Delivered at Light Speed.</span>
             </h1>
-            <p className="text-lg text-slate-300 mb-8 max-w-xl mx-auto md:mx-0">
-              Get printed notes from Vision, Vajiram, and Forum IAS delivered to your doorstep. Verified quality, cash on delivery available.
+            <p className="mx-auto max-w-2xl text-lg text-slate-300 md:text-xl">
+              Get the highest quality printed notes from Vision IAS, Vajiram, and more.
+              Verified quality, spiral bound, and delivered to your doorstep.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link href="/?category=gs" className="inline-flex h-12 items-center justify-center rounded-lg bg-secondary px-8 text-sm font-medium text-white shadow-lg transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center pt-4">
+              <Link
+                href="/?category=gs"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-secondary px-8 text-sm font-bold text-white transition-colors hover:bg-secondary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
+              >
                 Shop General Studies
-                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link href="/?category=optional" className="inline-flex h-12 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50 px-8 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+              <Link
+                href="/?category=optional"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-8 text-sm font-bold text-white transition-all hover:bg-white/20 hover:border-white/40"
+              >
                 Explore Optionals
               </Link>
-            </div>
-          </div>
-
-          {/* Hero Image/Visual */}
-          <div className="hidden md:block w-1/3">
-            <div className="relative aspect-square rounded-2xl bg-gradient-to-tr from-secondary/20 to-slate-800 p-8 border border-white/10 rotate-3 transform hover:rotate-6 transition-all duration-500 hover:scale-105">
-              <div className="absolute inset-4 bg-slate-950 rounded-xl border border-white/5 flex items-center justify-center shadow-2xl flex-col gap-2">
-                <span className="text-6xl font-black text-slate-800 select-none">UPSC</span>
-                <span className="text-sm text-slate-700 font-mono tracking-widest uppercase">Rank 1 Quality</span>
-              </div>
             </div>
           </div>
         </div>
@@ -100,11 +102,9 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
         </div>
 
         {productList.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {productList.map((product) => (
-              <div key={product.id} className="h-full">
-                <ProductCard product={product} />
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (

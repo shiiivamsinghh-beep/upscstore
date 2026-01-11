@@ -13,7 +13,9 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-    const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+    const discount = product.originalPrice && product.originalPrice > product.price
+        ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+        : 0;
     const addItem = useCart((state) => state.addItem);
     const [isAdded, setIsAdded] = useState(false);
 
