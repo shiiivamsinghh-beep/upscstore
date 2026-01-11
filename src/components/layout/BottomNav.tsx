@@ -13,7 +13,7 @@ export function BottomNav() {
     const isActive = (path: string) => pathname === path;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around border-t bg-background/80 backdrop-blur-lg px-4 pb-safe md:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around glass px-4 pb-safe md:hidden">
             <Link
                 href="/"
                 className={cn(

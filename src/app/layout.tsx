@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -33,8 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-        "min-h-screen bg-muted/30 font-sans antialiased text-foreground",
-        inter.variable
+        "min-h-screen bg-muted/30 font-sans antialiased text-foreground ambient-glow",
+        inter.variable,
+        outfit.variable
       )}>
         <div className="relative flex min-h-screen flex-col">
           <Header />

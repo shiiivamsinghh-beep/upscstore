@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc; /* Slate 50 */
-  --foreground: #0f172a; /* Slate 900 */
-  
-  /* Primary: Deep Blue (Trust/Authority) */
-  --primary: #0f172a; 
+  /* Slate 50 - Cleaner background */
+  --background: #f8fafc;
+  --foreground: #020617;
+  /* Slate 950 - Darker text */
+
+  /* Primary: Deep Midnight Blue (Authority) */
+  --primary: #020617;
   --primary-foreground: #f8fafc;
-  
-  /* Secondary: Amber/Gold (Highlight/Action) */
-  --secondary: #ea580c; /* Orange 600 - slightly more punchy than Amber */
+
+  /* Secondary: Vivid Amber (Focus/Action) */
+  --secondary: #f59e0b;
+  /* Amber 500 */
   --secondary-foreground: #ffffff;
-  
+
   /* UI Elements */
-  --muted: #f1f5f9; /* Slate 100 */
-  --muted-foreground: #64748b; /* Slate 500 */
-  --border: #e2e8f0; /* Slate 200 */
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #020617;
 }
 
 @theme inline {
@@ -32,6 +35,8 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
+  --font-heading: var(--font-heading);
 }
 
 body {
@@ -39,4 +44,27 @@ body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utilities for Premium Core Feel */
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading), sans-serif;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border-b border-white/20;
+  }
+
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-sm;
+  }
+
+  /* Ambient Mesh Gradient Background */
+  .ambient-glow {
+    background:
+      radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.03) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(2, 6, 23, 0.03) 0px, transparent 50%);
+  }
 }

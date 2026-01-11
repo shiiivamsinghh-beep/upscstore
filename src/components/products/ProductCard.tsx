@@ -27,7 +27,7 @@ export function ProductCard({ product }: ProductCardProps) {
     };
 
     return (
-        <Link href={`/product/${product.id}`} className="group relative rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-md overflow-hidden flex flex-col h-full hover:border-primary/50">
+        <Link href={`/product/${product.id}`} className="group relative rounded-2xl bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden flex flex-col h-full border border-transparent hover:border-black/5">
             {/* Badge */}
             {product.isBestSeller && (
                 <div className="absolute top-2 left-2 z-10 rounded bg-secondary px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-wider">
