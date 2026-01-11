@@ -37,11 +37,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(
-        "min-h-screen bg-muted/30 font-sans antialiased text-foreground ambient-glow",
-        inter.variable,
-        outfit.variable
-      )}>
+      <body
+        suppressHydrationWarning={true}
+        className={cn(
+          "min-h-screen bg-muted/30 font-sans antialiased text-foreground ambient-glow",
+          inter.variable,
+          outfit.variable
+        )}>
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1 pb-16 md:pb-0">

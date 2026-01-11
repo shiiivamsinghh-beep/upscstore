@@ -11,6 +11,9 @@ export function BottomNav() {
     const cartItemCount = useCart((state) => state.items.length);
 
     const isActive = (path: string) => pathname === path;
+    const isProductPage = pathname?.startsWith("/product/");
+
+    if (isProductPage) return null;
 
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around glass px-4 pb-safe md:hidden">
@@ -26,10 +29,10 @@ export function BottomNav() {
             </Link>
 
             <Link
-                href="/#categories"
+                href="/categories"
                 className={cn(
                     "flex flex-col items-center justify-center gap-1",
-                    isActive("/#categories") ? "text-primary" : "text-muted-foreground"
+                    isActive("/categories") ? "text-primary" : "text-muted-foreground"
                 )}
             >
                 <LayoutGrid className="h-6 w-6" />

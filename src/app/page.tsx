@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, CheckCircle2, Truck, ShieldCheck } from 'lucide-react';
@@ -15,11 +16,7 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
   let query = supabase.from('products').select('*');
 
   if (category) {
-    query = query.eq('category', category);
-  } else {
-    // If no category, maybe limit to featured or just all?
-    // Let's show all for now or maybe limit to 10
-    query = query.limit(20);
+    redirect(`/category/${category}`);
   }
 
   const { data: products } = await query;
@@ -49,13 +46,13 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center pt-4">
               <Link
-                href="/?category=gs"
+                href="/category/gs"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-secondary px-8 text-sm font-bold text-white transition-colors hover:bg-secondary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
               >
                 Shop General Studies
               </Link>
               <Link
-                href="/?category=optional"
+                href="/category/optional"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-8 text-sm font-bold text-white transition-all hover:bg-white/20 hover:border-white/40"
               >
                 Explore Optionals
