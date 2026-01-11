@@ -11,9 +11,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "UPSC Store | Premium Study Materials",
-  description: "Fastest delivery of UPSC coaching notes, test series, and optional materials.",
+  title: "UPSC Store | Premium Study Material",
+  description: "Best quality printed notes for UPSC/IAS preparation. Delivered to your doorstep.",
+  manifest: "/manifest.json",
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
+import { BottomNav } from "@/components/layout/BottomNav";
 
 export default function RootLayout({
   children,
@@ -28,10 +38,11 @@ export default function RootLayout({
       )}>
         <div className="relative flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 pb-16 md:pb-0">
             {children}
           </main>
           <Footer />
+          <BottomNav />
         </div>
       </body>
     </html>
