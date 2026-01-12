@@ -176,7 +176,7 @@ export function Header() {
 
             {/* --- MOBILE HEADER SYSTEM (md:hidden) --- */}
             {/* Moved outside the main wrapper to escape the parent's transform context, ensuring fixed positioning works relative to viewport */}
-            <div className="md:hidden h-[104px]">
+            <div className="md:hidden h-[100px]">
 
                 {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
                 <div
@@ -186,7 +186,7 @@ export function Header() {
                     )}
                 >
                     {/* Brand Row */}
-                    <div className="h-14 px-4 flex items-center justify-between border-b border-gray-50">
+                    <div className="h-[52px] px-3 flex items-center justify-between border-b border-gray-50">
                         <div className="flex items-center gap-3 shrink-0">
                             <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
                                 <Menu className="h-6 w-6" />
@@ -218,12 +218,12 @@ export function Header() {
                 {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN */}
                 <div
                     className={cn(
-                        "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-14 px-4 flex items-center gap-3 transition-transform duration-300 ease-in-out",
+                        "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-[52px] px-3 flex items-center gap-2 transition-transform duration-300 ease-in-out",
                         scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
                     )}
                 >
                     <button onClick={() => setIsMobileMenuOpen(true)} className="p-1 -ml-1 text-slate-700">
-                        <Menu className="h-6 w-6" />
+                        <Menu className="h-5 w-5" />
                     </button>
                     <form onSubmit={handleSearch} className="relative flex-1">
                         <div className="relative">
@@ -238,8 +238,8 @@ export function Header() {
                         </div>
                     </form>
                     <Link href="/cart" className="relative p-2">
-                        <ShoppingCart className="h-6 w-6 text-slate-700" />
-                        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                        <ShoppingCart className="h-5 w-5 text-slate-700" />
+                        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white shadow-sm ring-2 ring-white">
                             <CartCounter />
                         </span>
                     </Link>
