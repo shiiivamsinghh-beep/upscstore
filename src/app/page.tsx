@@ -19,10 +19,10 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
   }
 
   // Fetch trendings/all products from Supabase
-  // Limiting to 12 for the homepage to keep it fast
+  // Limiting to 12 for the homepage to keep it fast - Selecting only needed fields
   const { data: products } = await supabase
     .from('products')
-    .select('*')
+    .select('id, title, price, compare_at_price, images, category, slug, rating, created_at')
     .limit(12);
 
   const productList = (products as unknown as Product[]) || [];

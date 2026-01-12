@@ -8,10 +8,11 @@ export function HeroSection() {
             {/* Background with Overlay */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=2000"
+                    src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=1200"
                     alt="UPSC Preparation Background"
                     fill
                     priority
+                    sizes="(max-width: 768px) 100vw, 100vw"
                     className="object-cover transition-transform duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
