@@ -78,25 +78,25 @@ export function CategoryGrid() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
+            <div className="flex gap-4 overflow-x-auto pb-6 pt-2 no-scrollbar scroll-smooth -mx-4 px-4 md:mx-0 md:px-0">
                 {categories.map((cat) => (
                     <Link
                         key={cat.id}
                         href={cat.href}
-                        className="group relative overflow-hidden rounded-lg md:rounded-xl border border-border bg-card p-3 md:p-6 transition-all hover:shadow-md hover:border-secondary/50"
+                        className="group relative min-w-[150px] md:min-w-[220px] bg-card p-4 md:p-6 rounded-xl border border-border hover:shadow-lg hover:border-secondary/50 transition-all duration-300 hover:-translate-y-1 block shrink-0"
                     >
-                        <div className={`w-8 h-8 md:w-14 md:h-14 rounded-lg md:rounded-xl ${cat.color} flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                            <cat.icon className="w-4 h-4 md:w-7 md:h-7" />
+                        <div className={`w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl ${cat.color} flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                            <cat.icon className="w-5 h-5 md:w-7 md:h-7" />
                         </div>
 
-                        <h3 className="font-heading text-xs md:text-lg font-bold mb-0.5 group-hover:text-secondary transition-colors">
+                        <h3 className="font-heading text-sm md:text-lg font-bold mb-1 group-hover:text-secondary transition-colors">
                             {cat.name}
                         </h3>
-                        <p className="text-muted-foreground font-medium text-[10px] md:text-sm hidden sm:block">
+                        <p className="text-muted-foreground font-medium text-[10px] md:text-sm line-clamp-2">
                             {cat.description}
                         </p>
 
-                        <div className="absolute right-1 top-1 md:right-4 md:top-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                        <div className="absolute right-3 top-3 md:right-4 md:top-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-secondary"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                         </div>
                     </Link>
