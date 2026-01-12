@@ -102,11 +102,11 @@ export function InstituteStrip() {
                             className={`group relative min-w-[140px] md:min-w-[180px] bg-white p-4 rounded-xl border ${inst.borderColor} shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block shrink-0`}
                         >
                             <div className="flex flex-col items-center text-center gap-3">
-                                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center bg-white border border-slate-100 p-2 transition-transform group-hover:scale-105 overflow-hidden relative shadow-sm`}>
+                                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center bg-white border border-slate-100 transition-transform group-hover:scale-105 overflow-hidden relative shadow-sm`}>
                                     <InstituteLogo
                                         src={inst.logoUrl}
                                         alt={`${inst.name} Logo`}
-                                        fallback={<inst.icon className={`h-6 w-6 ${inst.color}`} />}
+                                        fallback={<inst.icon className={`h-8 w-8 ${inst.color}`} />}
                                     />
                                 </div>
 
