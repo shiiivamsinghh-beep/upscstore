@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu, BookOpen, X, Phone, Truck, ShieldCheck, User, ChevronDown } from 'lucide-react';
+import { ShoppingCart, Search, Menu, BookOpen, X, Phone, Truck, ShieldCheck, User, ChevronDown, ArrowLeft } from 'lucide-react';
 import { CartCounter } from '@/components/cart/CartCounter';
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
@@ -182,7 +182,7 @@ export function Header() {
                 <div
                     className={cn(
                         "fixed top-0 left-0 right-0 z-40 bg-white transition-all duration-300 ease-in-out shadow-sm",
-                        scrollDirection === 'down' ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
+                        (scrollDirection === 'down' || isSearchOpen) ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
                     )}
                 >
                     {/* Brand Row */}
@@ -199,7 +199,7 @@ export function Header() {
                             </Link>
                         </div>
                         <div className="flex items-center gap-3">
-                            <button className="text-slate-700" onClick={() => window.alert("Search Click (Logic Pending)")}>
+                            <button className="text-slate-700" onClick={() => setIsSearchOpen(true)}>
                                 <Search className="h-5 w-5" />
                             </button>
                             <Link href="/cart" className="relative">
@@ -215,16 +215,22 @@ export function Header() {
                     {pathname === '/' && <CategoryStrip />}
                 </div>
 
-                {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN */}
+                {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN or Search Active */}
                 <div
                     className={cn(
                         "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-[52px] px-3 flex items-center gap-2 transition-transform duration-300 ease-in-out",
-                        scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
+                        (scrollDirection === 'down' || isSearchOpen) ? "translate-y-0" : "-translate-y-full"
                     )}
                 >
-                    <button onClick={() => setIsMobileMenuOpen(true)} className="p-1 -ml-1 text-slate-700">
-                        <Menu className="h-5 w-5" />
-                    </button>
+                    {isSearchOpen ? (
+                        <button onClick={() => setIsSearchOpen(false)} className="p-1 -ml-1 text-slate-700">
+                            <ArrowLeft className="h-5 w-5" />
+                        </button>
+                    ) : (
+                        <button onClick={() => setIsMobileMenuOpen(true)} className="p-1 -ml-1 text-slate-700">
+                            <Menu className="h-5 w-5" />
+                        </button>
+                    )}
                     <form onSubmit={handleSearch} className="relative flex-1">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
