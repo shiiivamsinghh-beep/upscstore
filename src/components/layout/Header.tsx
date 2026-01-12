@@ -5,14 +5,19 @@ import { ShoppingCart, Search, Menu, BookOpen, X, Phone, Truck, ShieldCheck, Use
 import { CartCounter } from '@/components/cart/CartCounter';
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { CategoryStrip } from '@/components/home/CategoryStrip';
+import { useScrollDirection } from '@/hooks/use-scroll-direction';
 
 export function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSearchFocus, setIsSearchFocus] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const searchInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const pathname = usePathname();
+    const scrollDirection = useScrollDirection();
 
     // Focus mobile search when toggled
     useEffect(() => {
@@ -41,7 +46,9 @@ export function Header() {
 
     const navLinks = [
         { name: "General Studies", href: "/category/gs" },
+        { name: "Institutes", href: "/institutes" },
         { name: "Optionals", href: "/category/optional" },
+        { name: "State PCS", href: "/category/state-pcs" },
         { name: "CSAT", href: "/category/csat" },
         { name: "Test Series", href: "/category/test-series" },
         { name: "NCERT Books", href: "/category/ncert" },
@@ -49,147 +56,188 @@ export function Header() {
     ];
 
     return (
-        <div className="flex flex-col w-full font-sans">
+        <>
+            <div
+                className={cn(
+                    "flex flex-col w-full font-sans bg-white sticky top-0 z-50 transition-transform duration-300 ease-in-out",
+                    scrollDirection === 'down' && !isMobileMenuOpen ? "-translate-y-[56px]" : "translate-y-0"
+                )}
+            >
 
-            {/* --- LAYER 1: TRUST STRIP (Desktop Only) --- */}
-            <div className="hidden md:flex bg-[#0f172a] text-white/80 text-[11px] font-medium py-1.5 px-4 justify-between items-center tracking-wide border-b border-white/5">
-                <div className="container mx-auto flex justify-between items-center">
-                    <div className="flex gap-6">
-                        <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <ShieldCheck className="h-3 w-3 text-emerald-400" />
-                            India's Most Trusted UPSC Store
-                        </span>
-                        <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <Truck className="h-3 w-3 text-amber-400" />
-                            Fast Delivery across India
-                        </span>
-                    </div>
-                    <div className="flex gap-6">
-                        <Link href="/track-order" className="hover:text-white transition-colors">Track Your Order</Link>
-                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white hover:text-emerald-400 transition-colors font-bold">
-                            <Phone className="h-3 w-3" />
-                            Support: +91-98765-43210
-                        </a>
+                {/* --- LAYER 1: TRUST STRIP (Desktop Only) --- */}
+                <div className="hidden md:flex bg-[#0f172a] text-white/80 text-[11px] font-medium py-1.5 px-4 justify-between items-center tracking-wide border-b border-white/5">
+                    <div className="container mx-auto flex justify-between items-center">
+                        <div className="flex gap-6">
+                            <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                <ShieldCheck className="h-3 w-3 text-emerald-400" />
+                                India's Most Trusted UPSC Store
+                            </span>
+                            <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                <Truck className="h-3 w-3 text-amber-400" />
+                                Fast Delivery across India
+                            </span>
+                        </div>
+                        <div className="flex gap-6">
+                            <Link href="/track-order" className="hover:text-white transition-colors">Track Your Order</Link>
+                            <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white hover:text-emerald-400 transition-colors font-bold">
+                                <Phone className="h-3 w-3" />
+                                Support: +91-98765-43210
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* --- LAYER 2: BRAND & TECH HEADER (Sticky on Mobile) --- */}
-            <header className="bg-white border-b border-gray-100 sticky top-0 md:static z-50">
-                <div className="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between gap-4 md:gap-8">
+                {/* --- LAYER 2: DESKTOP HEADER (Clean, Static) --- */}
+                <header className="hidden md:block bg-white border-b border-gray-100 z-40 relative">
+                    <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-8">
+                        {/* Left: Logo */}
+                        <div className="flex items-center gap-3 shrink-0">
+                            <Link href="/" className="flex items-center gap-2 group">
+                                <div className="bg-[#0f172a] p-1.5 rounded-lg group-hover:bg-slate-800 transition-colors">
+                                    <BookOpen className="h-6 w-6 text-white" />
+                                </div>
+                                <div className="flex flex-col -space-y-1">
+                                    <span className="text-2xl font-bold tracking-tight text-[#0f172a] font-heading">UPSC Store</span>
+                                    <span className="text-[11px] font-medium text-slate-500 uppercase tracking-widest block">Aspirant's Ecosystem</span>
+                                </div>
+                            </Link>
+                        </div>
 
-                    {/* Left: Logo & Mobile Menu */}
-                    <div className="flex items-center gap-3 shrink-0">
-                        <button
-                            className="md:hidden p-2 -ml-2 text-slate-700 hover:text-black hover:bg-slate-100 rounded-full transition-colors"
-                            onClick={() => setIsMobileMenuOpen(true)}
-                        >
-                            <Menu className="h-6 w-6" />
-                        </button>
+                        {/* Center: Search */}
+                        <div className="flex-1 max-w-2xl">
+                            <form onSubmit={handleSearch} className="relative w-full group">
+                                <input
+                                    type="text"
+                                    placeholder="Search 'Polity Notes' or 'Vision IAS'..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full h-11 pl-11 pr-4 rounded-full bg-slate-50 border-2 border-slate-100 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-400/10 transition-all shadow-sm group-hover:border-slate-200"
+                                />
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-amber-500 transition-colors" />
+                            </form>
+                        </div>
 
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <div className="bg-[#0f172a] p-1.5 rounded-lg group-hover:bg-slate-800 transition-colors">
-                                <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                        {/* Right: Actions */}
+                        <div className="flex items-center gap-6 shrink-0">
+                            <div className="flex items-center gap-2 cursor-pointer hover:bg-slate-50 p-2 -mr-2 rounded-lg transition-colors group">
+                                <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 group-hover:border-amber-400 group-hover:text-amber-600 transition-colors text-slate-600">
+                                    <User className="h-5 w-5" />
+                                </div>
+                                <div className="flex flex-col text-sm leading-none">
+                                    <span className="text-slate-500 text-[11px]">Welcome</span>
+                                    <span className="font-bold text-slate-900 group-hover:text-amber-600">Login / Sign Up</span>
+                                </div>
                             </div>
-                            <div className="flex flex-col -space-y-1">
-                                <span className="text-xl md:text-2xl font-bold tracking-tight text-[#0f172a] font-heading">UPSC Store</span>
-                                <span className="text-[10px] md:text-[11px] font-medium text-slate-500 uppercase tracking-widest hidden sm:block">Aspirant's Ecosystem</span>
-                            </div>
-                        </Link>
+
+                            <Link href="/cart" className="relative group p-2 rounded-lg transition-colors">
+                                <ShoppingCart className="h-6 w-6 text-slate-700 group-hover:text-amber-600 transition-colors" />
+                                <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                                    <CartCounter />
+                                </span>
+                            </Link>
+                        </div>
                     </div>
+                </header>
 
-                    {/* Center: SMART SEARCH (Desktop) */}
-                    <div className="hidden md:flex flex-1 max-w-2xl">
-                        <form onSubmit={handleSearch} className="relative w-full group">
-                            <input
-                                type="text"
-                                placeholder="Search 'Polity Notes' or 'Vision IAS'..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full h-11 pl-11 pr-4 rounded-full bg-slate-50 border-2 border-slate-100 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-400/10 transition-all shadow-sm group-hover:border-slate-200"
-                            />
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-amber-500 transition-colors" />
-                            <div className="absolute right-2 top-1/2 -translate-y-1/2 hidden group-focus-within:flex">
-                                <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-full border border-slate-200">Values Ent</span>
+                {/* --- LAYER 2: MOBILE HEADER SYSTEM (md:hidden) --- */}
+                {/* We use a fixed height container to prevent layout jumps, but the actual bars are fixed/sticky */}
+                <div className="md:hidden h-[104px]"> {/* Height of Brand Row (56px) + CategoryStrip (48px) approx */}
+
+                    {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
+                    <div
+                        className={cn(
+                            "fixed top-0 left-0 right-0 z-40 bg-white transition-all duration-300 ease-in-out shadow-sm",
+                            scrollDirection === 'down' ? "-translate-y-full opacity-0 invisible" : "translate-y-0 opacity-100 visible"
+                        )}
+                    >
+                        {/* Brand Row */}
+                        <div className="h-14 px-4 flex items-center justify-between border-b border-gray-50">
+                            <div className="flex items-center gap-3">
+                                <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
+                                    <Menu className="h-6 w-6" />
+                                </button>
+                                <Link href="/" className="flex items-center gap-2">
+                                    <div className="bg-[#0f172a] p-1.5 rounded-lg">
+                                        <BookOpen className="h-4 w-4 text-white" />
+                                    </div>
+                                    <span className="text-lg font-bold text-[#0f172a] font-heading">UPSC Store</span>
+                                </Link>
                             </div>
-                        </form>
-                    </div>
-
-                    {/* Right: Actions */}
-                    <div className="flex items-center gap-4 md:gap-6 shrink-0">
-                        <button
-                            className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-full"
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                        >
-                            <Search className="h-6 w-6" />
-                        </button>
-
-                        <div className="hidden lg:flex items-center gap-2 cursor-pointer hover:bg-slate-50 p-2 -mr-2 rounded-lg transition-colors group">
-                            <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 group-hover:border-amber-400 group-hover:text-amber-600 transition-colors text-slate-600">
-                                <User className="h-5 w-5" />
-                            </div>
-                            <div className="flex flex-col text-sm leading-none">
-                                <span className="text-slate-500 text-[11px]">Welcome</span>
-                                <span className="font-bold text-slate-900 group-hover:text-amber-600">Login / Sign Up</span>
+                            <div className="flex items-center gap-3">
+                                <button className="text-slate-700" onClick={() => window.alert("Search Click (Logic Pending)")}>
+                                    <Search className="h-5 w-5" />
+                                </button>
+                                <Link href="/cart" className="relative">
+                                    <ShoppingCart className="h-5 w-5 text-slate-700" />
+                                    <span className="absolute -top-1.5 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white ring-1 ring-white">
+                                        <CartCounter />
+                                    </span>
+                                </Link>
                             </div>
                         </div>
 
-                        <Link href="/cart" className="relative group p-2 -mr-2 md:mr-0 hover:bg-slate-50 rounded-lg transition-colors">
-                            <ShoppingCart className="h-6 w-6 text-slate-700 group-hover:text-amber-600 transition-colors" />
-                            <span className="absolute top-0.5 right-0.5 md:top-1 md:right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                        {/* Category Strip */}
+                        {pathname === '/' && <CategoryStrip />}
+                    </div>
+
+                    {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN */}
+                    <div
+                        className={cn(
+                            "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-14 px-4 flex items-center gap-3 transition-transform duration-300 ease-in-out",
+                            scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
+                        )}
+                    >
+                        <form onSubmit={handleSearch} className="relative flex-1">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search for Products..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-100 border border-slate-200 text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 focus:bg-white transition-all shadow-sm text-slate-900 placeholder:text-slate-500"
+                                />
+                            </div>
+                        </form>
+                        <Link href="/cart" className="relative p-2">
+                            <ShoppingCart className="h-6 w-6 text-slate-700" />
+                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
                                 <CartCounter />
                             </span>
                         </Link>
                     </div>
                 </div>
 
-                {/* Mobile Search Expandable */}
-                {isSearchOpen && (
-                    <div className="md:hidden border-t px-4 py-3 bg-white animate-in slide-in-from-top-1 shadow-inner">
-                        <form onSubmit={handleSearch} className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                            <input
-                                ref={searchInputRef}
-                                type="text"
-                                placeholder="Search for notes..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-100 border-none text-sm focus:ring-2 focus:ring-amber-500/20 focus:bg-white transition-all"
-                            />
-                        </form>
-                    </div>
-                )}
-            </header>
-
-            {/* --- LAYER 3: SYLLABUS NAV (Sticky Desktop) --- */}
-            <div className="hidden md:block bg-white border-b border-gray-200 sticky top-0 z-40 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]">
-                <div className="container mx-auto px-4">
-                    <nav className="flex items-center gap-8 h-12 text-[13px] font-semibold text-slate-600 overflow-x-auto no-scrollbar">
-                        <button
-                            onClick={() => setIsMobileMenuOpen(true)}
-                            className="flex items-center gap-2 pr-4 border-r border-gray-200 hover:text-[#0f172a] transition-colors h-full"
-                        >
-                            <Menu className="h-4 w-4" />
-                            <span>All Categories</span>
-                        </button>
-
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="hover:text-amber-600 hover:bg-amber-50 px-3 py-1.5 rounded-md transition-all whitespace-nowrap"
+                {/* --- LAYER 3: DESKTOP NAV (Keep as is) --- */}
+                <div className="hidden md:block bg-white border-b border-gray-200 z-40 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]">
+                    <div className="container mx-auto px-4">
+                        <nav className="flex items-center gap-8 h-12 text-[13px] font-semibold text-slate-600 overflow-x-auto no-scrollbar">
+                            <button
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                className="flex items-center gap-2 pr-4 border-r border-gray-200 hover:text-[#0f172a] transition-colors h-full"
                             >
-                                {link.name}
-                            </Link>
-                        ))}
+                                <Menu className="h-4 w-4" />
+                                <span>All Categories</span>
+                            </button>
 
-                        <div className="ml-auto flex items-center gap-4 pl-4 border-l border-gray-200 h-full">
-                            <Link href="/?category=best-sellers" className="flex items-center gap-1 text-amber-600 hover:text-amber-700">
-                                <ShieldCheck className="h-4 w-4" />
-                                <span>Best Sellers</span>
-                            </Link>
-                        </div>
-                    </nav>
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="hover:text-amber-600 hover:bg-amber-50 px-3 py-1.5 rounded-md transition-all whitespace-nowrap"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+
+                            <div className="ml-auto flex items-center gap-4 pl-4 border-l border-gray-200 h-full">
+                                <Link href="/?category=best-sellers" className="flex items-center gap-1 text-amber-600 hover:text-amber-700">
+                                    <ShieldCheck className="h-4 w-4" />
+                                    <span>Best Sellers</span>
+                                </Link>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
 
@@ -263,6 +311,6 @@ export function Header() {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 }

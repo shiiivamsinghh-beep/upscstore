@@ -40,6 +40,16 @@ export default function CategoriesPage() {
             href: "/category/optional"
         },
         {
+            id: "state-pcs",
+            name: "State PCS",
+            description: "UPPCS, BPSC, RAS, MPPSC & more",
+            icon: Globe2,
+            gradient: "from-red-500 to-rose-600",
+            bg: "bg-red-50",
+            span: "md:col-span-1",
+            href: "/category/state-pcs"
+        },
+        {
             id: "test-series",
             name: "Test Series",
             description: "Prelims & Mains Mock Tests",

@@ -131,6 +131,63 @@ const categoryConfig: Record<string, { name: string; description: string; icon: 
         from: "from-amber-500",
         to: "to-orange-600",
         text: "text-amber-50"
+    },
+    // --- State PCS ---
+    "state-pcs": {
+        name: "State PCS",
+        description: "Specialized material for State Public Service Commissions.",
+        icon: Map,
+        from: "from-slate-700",
+        to: "to-slate-900",
+        text: "text-slate-50"
+    },
+    uppcs: {
+        name: "UPPCS (Uttar Pradesh)",
+        description: "UP Special GK, Hindi & Current Affairs for UPPCS.",
+        icon: Map, // Fallback
+        from: "from-red-600",
+        to: "to-red-800",
+        text: "text-red-50"
+    },
+    bpsc: {
+        name: "BPSC (Bihar)",
+        description: "Bihar Special, History & Current Affairs.",
+        icon: Map,
+        from: "from-blue-600",
+        to: "to-blue-800",
+        text: "text-blue-50"
+    },
+    ras: {
+        name: "RPSC (Rajasthan)",
+        description: "Rajasthan History, Culture & Geography.",
+        icon: Map,
+        from: "from-orange-500",
+        to: "to-orange-700",
+        text: "text-orange-50"
+    },
+    mppsc: {
+        name: "MPPSC (Madhya Pradesh)",
+        description: "MP GK, Tribal History & Geography.",
+        icon: Map,
+        from: "from-green-600",
+        to: "to-green-800",
+        text: "text-green-50"
+    },
+    hcs: {
+        name: "HCS (Haryana)",
+        description: "Haryana GK & Current Affairs.",
+        icon: Map,
+        from: "from-indigo-600",
+        to: "to-indigo-800",
+        text: "text-indigo-50"
+    },
+    ukpsc: {
+        name: "UKPSC (Uttarakhand)",
+        description: "Uttarakhand Special GK & Geography.",
+        icon: Map,
+        from: "from-teal-600",
+        to: "to-teal-800",
+        text: "text-teal-50"
     }
 };
 
