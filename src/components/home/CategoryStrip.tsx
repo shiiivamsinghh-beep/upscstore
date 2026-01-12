@@ -72,7 +72,7 @@ export function CategoryStrip() {
                         href={cat.href}
                         className="flex flex-col items-center gap-1.5 min-w-[64px] shrink-0 group"
                     >
-                        <div className={`w-10 h-10 rounded-[14px] ${cat.color} flex items-center justify-center transition-transform group-active:scale-95 shadow-sm`}>
+                        <div className={`w-10 h-10 rounded-full ${cat.color} flex items-center justify-center transition-transform group-active:scale-95 shadow-sm`}>
                             <cat.icon className="w-5 h-5" />
                         </div>
                         <span className="text-[10px] font-bold text-slate-600 text-center leading-tight line-clamp-2 tracking-wide">
