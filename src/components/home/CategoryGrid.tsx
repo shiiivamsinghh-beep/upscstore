@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookText, ScrollText, PenTool, GraduationCap } from 'lucide-react';
+import { BookText, ScrollText, PenTool, GraduationCap, BookOpen, Globe, Scale, Newspaper } from 'lucide-react';
 
 const categories = [
     {
@@ -33,6 +33,38 @@ const categories = [
         icon: GraduationCap,
         href: '/category/csat',
         color: 'bg-purple-50 text-purple-600',
+    },
+    {
+        id: 'ncert',
+        name: 'NCERT Books',
+        description: 'Basic foundation texts',
+        icon: BookOpen,
+        href: '/category/ncert',
+        color: 'bg-rose-50 text-rose-600',
+    },
+    {
+        id: 'current-affairs',
+        name: 'Current Affairs',
+        description: 'Monthly magazines & updates',
+        icon: Globe,
+        href: '/category/current-affairs',
+        color: 'bg-cyan-50 text-cyan-600',
+    },
+    {
+        id: 'state-pcs',
+        name: 'State PCS',
+        description: 'State specific exam material',
+        icon: Scale,
+        href: '/category/state-pcs',
+        color: 'bg-indigo-50 text-indigo-600',
+    },
+    {
+        id: 'magazines',
+        name: 'Magazines',
+        description: 'Yojana, Kurukshetra & more',
+        icon: Newspaper,
+        href: '/category/magazines',
+        color: 'bg-slate-50 text-slate-600',
     },
 ];
 
