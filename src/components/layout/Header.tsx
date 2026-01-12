@@ -176,7 +176,7 @@ export function Header() {
 
             {/* --- MOBILE HEADER SYSTEM (md:hidden) --- */}
             {/* Moved outside the main wrapper to escape the parent's transform context, ensuring fixed positioning works relative to viewport */}
-            <div className="md:hidden h-[100px]">
+            <div className="md:hidden h-[108px]">
 
                 {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
                 <div
@@ -186,7 +186,7 @@ export function Header() {
                     )}
                 >
                     {/* Brand Row */}
-                    <div className="h-[52px] px-3 flex items-center justify-between border-b border-gray-50">
+                    <div className="h-[60px] pt-2 px-3 flex items-center justify-between border-b border-gray-50">
                         <div className="flex items-center gap-3 shrink-0">
                             <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
                                 <Menu className="h-6 w-6" />
