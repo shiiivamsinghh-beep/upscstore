@@ -139,74 +139,7 @@ export function Header() {
                     </div>
                 </header>
 
-                {/* --- LAYER 2: MOBILE HEADER SYSTEM (md:hidden) --- */}
-                {/* We use a fixed height container to prevent layout jumps, but the actual bars are fixed/sticky */}
-                <div className="md:hidden h-[104px]"> {/* Height of Brand Row (56px) + CategoryStrip (48px) approx */}
 
-                    {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
-                    <div
-                        className={cn(
-                            "fixed top-0 left-0 right-0 z-40 bg-white transition-all duration-300 ease-in-out shadow-sm",
-                            scrollDirection === 'down' ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
-                        )}
-                    >
-                        {/* Brand Row */}
-                        <div className="h-14 px-4 flex items-center justify-between border-b border-gray-50">
-                            <div className="flex items-center gap-3 shrink-0">
-                                <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
-                                    <Menu className="h-6 w-6" />
-                                </button>
-                                <Link href="/" className="flex items-center gap-2">
-                                    <div className="bg-[#0f172a] p-1.5 rounded-lg">
-                                        <BookOpen className="h-4 w-4 text-white" />
-                                    </div>
-                                    <span className="text-lg font-bold text-[#0f172a] font-heading whitespace-nowrap">UPSC Store</span>
-                                </Link>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <button className="text-slate-700" onClick={() => window.alert("Search Click (Logic Pending)")}>
-                                    <Search className="h-5 w-5" />
-                                </button>
-                                <Link href="/cart" className="relative">
-                                    <ShoppingCart className="h-5 w-5 text-slate-700" />
-                                    <span className="absolute -top-1.5 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white ring-1 ring-white">
-                                        <CartCounter />
-                                    </span>
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Category Strip */}
-                        {pathname === '/' && <CategoryStrip />}
-                    </div>
-
-                    {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN */}
-                    <div
-                        className={cn(
-                            "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-14 px-4 flex items-center gap-3 transition-transform duration-300 ease-in-out",
-                            scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
-                        )}
-                    >
-                        <form onSubmit={handleSearch} className="relative flex-1">
-                            <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                <input
-                                    type="text"
-                                    placeholder="Search for Products..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-100 border border-slate-200 text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 focus:bg-white transition-all shadow-sm text-slate-900 placeholder:text-slate-500"
-                                />
-                            </div>
-                        </form>
-                        <Link href="/cart" className="relative p-2">
-                            <ShoppingCart className="h-6 w-6 text-slate-700" />
-                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
-                                <CartCounter />
-                            </span>
-                        </Link>
-                    </div>
-                </div>
 
                 {/* --- LAYER 3: DESKTOP NAV (Keep as is) --- */}
                 <div className="hidden md:block bg-white border-b border-gray-200 z-40 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]">
@@ -238,6 +171,75 @@ export function Header() {
                             </div>
                         </nav>
                     </div>
+                </div>
+            </div>
+
+            {/* --- MOBILE HEADER SYSTEM (md:hidden) --- */}
+            {/* Moved outside the main wrapper to escape the parent's transform context, ensuring fixed positioning works relative to viewport */}
+            <div className="md:hidden h-[104px]">
+
+                {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
+                <div
+                    className={cn(
+                        "fixed top-0 left-0 right-0 z-40 bg-white transition-all duration-300 ease-in-out shadow-sm",
+                        scrollDirection === 'down' ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
+                    )}
+                >
+                    {/* Brand Row */}
+                    <div className="h-14 px-4 flex items-center justify-between border-b border-gray-50">
+                        <div className="flex items-center gap-3 shrink-0">
+                            <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
+                                <Menu className="h-6 w-6" />
+                            </button>
+                            <Link href="/" className="flex items-center gap-2 shrink-0">
+                                <div className="bg-[#0f172a] p-1.5 rounded-lg shrink-0">
+                                    <BookOpen className="h-4 w-4 text-white" />
+                                </div>
+                                <span className="text-lg font-bold text-[#0f172a] font-heading whitespace-nowrap">UPSC Store</span>
+                            </Link>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <button className="text-slate-700" onClick={() => window.alert("Search Click (Logic Pending)")}>
+                                <Search className="h-5 w-5" />
+                            </button>
+                            <Link href="/cart" className="relative">
+                                <ShoppingCart className="h-5 w-5 text-slate-700" />
+                                <span className="absolute -top-1.5 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white ring-1 ring-white">
+                                    <CartCounter />
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Category Strip */}
+                    {pathname === '/' && <CategoryStrip />}
+                </div>
+
+                {/* VIEW B: COMPACT SEARCH (Search + Cart) - Visible on DOWN */}
+                <div
+                    className={cn(
+                        "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md h-14 px-4 flex items-center gap-3 transition-transform duration-300 ease-in-out",
+                        scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
+                    )}
+                >
+                    <form onSubmit={handleSearch} className="relative flex-1">
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                            <input
+                                type="text"
+                                placeholder="Search for Products..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-100 border border-slate-200 text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 focus:bg-white transition-all shadow-sm text-slate-900 placeholder:text-slate-500"
+                            />
+                        </div>
+                    </form>
+                    <Link href="/cart" className="relative p-2">
+                        <ShoppingCart className="h-6 w-6 text-slate-700" />
+                        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                            <CartCounter />
+                        </span>
+                    </Link>
                 </div>
             </div>
 
