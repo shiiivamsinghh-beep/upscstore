@@ -56,20 +56,7 @@ export default async function ProductPage(props: PageProps) {
 
     return (
         <div className="bg-white min-h-screen pb-24 md:pb-12">
-            {/* Mobile Header Overlap / Breadcrumb */}
-            <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 md:hidden">
-                <div className="px-4 h-14 flex items-center justify-between">
-                    <Link href="/" className="p-2 -ml-2 text-slate-700 hover:bg-slate-100 rounded-full transition-colors">
-                        <ArrowLeft className="h-5 w-5" />
-                    </Link>
-                    <div className="font-semibold text-sm truncate max-w-[200px] text-slate-900">
-                        {product.title}
-                    </div>
-                    <button className="p-2 -mr-2 text-slate-700 hover:bg-slate-100 rounded-full transition-colors">
-                        <Share2 className="h-5 w-5" />
-                    </button>
-                </div>
-            </div>
+
 
             <main className="container mx-auto px-4 md:px-6 py-4 md:py-12">
                 {/* Desktop Breadcrumb */}

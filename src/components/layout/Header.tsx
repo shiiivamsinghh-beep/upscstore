@@ -255,7 +255,7 @@ export function Header() {
 
             {/* VIEW C: INDEPENDENT CATEGORY STRIP - Sticky below header */}
             {/* VIEW C: INDEPENDENT CATEGORY STRIP - Sticky below header */}
-            {(pathname === '/' || pathname?.startsWith('/category/') || (pathname?.startsWith('/institutes/') && pathname.split('/').filter(Boolean).length > 1)) && (
+            {(pathname === '/' || pathname?.startsWith('/category/') || pathname?.startsWith('/product/') || (pathname?.startsWith('/institutes/') && pathname.split('/').filter(Boolean).length > 1)) && (
                 <div
                     className={cn(
                         "fixed top-[64px] left-0 right-0 z-30 bg-white shadow-sm transition-transform duration-300 ease-in-out border-b border-gray-50 md:hidden",
