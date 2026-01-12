@@ -108,14 +108,14 @@ export default function InstitutesPage() {
             </div>
 
             <div className="container mx-auto px-4 max-w-6xl py-6 md:py-12">
-                <div className="grid grid-cols-3 gap-2 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
                     {institutes.map((inst) => (
                         <Link
                             key={inst.id}
                             href={inst.href}
-                            className={`group relative overflow-hidden bg-white p-2 md:p-6 rounded-xl md:rounded-2xl border ${inst.borderColor} shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block`}
+                            className={`group relative overflow-hidden bg-white p-3 md:p-6 rounded-xl md:rounded-2xl border ${inst.borderColor} shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block`}
                         >
-                            <div className="flex items-start justify-between mb-2 md:mb-6">
+                            <div className="flex items-start justify-between mb-3 md:mb-6">
                                 <div className={`w-14 h-14 md:w-20 md:h-20 rounded-lg md:rounded-xl flex items-center justify-center bg-white border border-slate-100 transition-transform group-hover:scale-105 overflow-hidden relative`}>
                                     <InstituteLogo
                                         src={inst.logoUrl}
@@ -129,10 +129,10 @@ export default function InstitutesPage() {
                             </div>
 
                             <div>
-                                <h3 className="text-[10px] md:text-xl font-bold text-slate-900 mb-0.5 md:mb-2 group-hover:text-blue-700 transition-colors leading-tight">
+                                <h3 className="text-xs md:text-xl font-bold text-slate-900 mb-1 md:mb-2 group-hover:text-blue-700 transition-colors leading-tight">
                                     {inst.name}
                                 </h3>
-                                <p className="text-slate-500 text-[9px] md:text-sm font-medium leading-tight opacity-80 line-clamp-2">
+                                <p className="text-slate-500 text-[10px] md:text-sm font-medium leading-tight opacity-80 line-clamp-2">
                                     {inst.description}
                                 </p>
                             </div>
