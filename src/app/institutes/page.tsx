@@ -87,20 +87,21 @@ export default function InstitutesPage() {
     return (
         <div className="min-h-screen bg-slate-50/50">
             {/* Hero Section */}
-            <div className="bg-white border-b border-slate-100 py-12">
+            {/* Hero Section */}
+            <div className="bg-white border-b border-slate-100 py-4 md:py-8">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <Link
                         href="/"
-                        className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-slate-900 mb-6 transition-colors uppercase tracking-wider"
+                        className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-slate-900 mb-2 transition-colors uppercase tracking-wider"
                     >
                         <ArrowLeft className="w-3 h-3 mr-1" />
                         Back to Home
                     </Link>
                     <div className="max-w-2xl">
-                        <h1 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading tracking-tight mb-4">
+                        <h1 className="text-2xl md:text-5xl font-bold text-slate-900 font-heading tracking-tight mb-2">
                             Shop by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Institute</span>
                         </h1>
-                        <p className="text-lg text-slate-600">
+                        <p className="text-sm md:text-base text-slate-600">
                             Don't know what category you need? Use materials directly from the coaching centers you admire.
                         </p>
                     </div>
