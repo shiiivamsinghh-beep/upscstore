@@ -176,7 +176,7 @@ export function Header() {
 
             {/* --- MOBILE HEADER SYSTEM (md:hidden) --- */}
             {/* Moved outside the main wrapper to escape the parent's transform context, ensuring fixed positioning works relative to viewport */}
-            <div className="md:hidden h-[148px]">
+            <div className="md:hidden h-[156px]">
 
                 {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
                 <div
@@ -186,7 +186,7 @@ export function Header() {
                     )}
                 >
                     {/* Brand Row */}
-                    <div className="h-[60px] pt-2 px-3 flex items-center justify-between border-b border-gray-50">
+                    <div className="h-[64px] pt-2 px-3 flex items-center justify-between border-b border-gray-50">
                         <div className="flex items-center gap-3 shrink-0">
                             <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
                                 <Menu className="h-6 w-6" />
@@ -220,7 +220,7 @@ export function Header() {
                         (scrollDirection === 'down' || isSearchOpen) ? "translate-y-0" : "-translate-y-full"
                     )}
                 >
-                    <div className="w-full h-[60px] pt-2 flex items-center gap-2 px-3">
+                    <div className="w-full h-[64px] pt-2 flex items-center gap-2 px-3">
                         {isSearchOpen ? (
                             <button onClick={() => setIsSearchOpen(false)} className="p-1 -ml-1 text-slate-700 shrink-0">
                                 <ArrowLeft className="h-5 w-5" />
@@ -258,7 +258,7 @@ export function Header() {
             {pathname === '/' && (
                 <div
                     className={cn(
-                        "fixed top-[60px] left-0 right-0 z-30 bg-white shadow-sm transition-transform duration-300 ease-in-out border-b border-gray-50 md:hidden",
+                        "fixed top-[64px] left-0 right-0 z-30 bg-white shadow-sm transition-transform duration-300 ease-in-out border-b border-gray-50 md:hidden",
                         (scrollDirection === 'down' && !isSearchOpen) ? "-translate-y-[140%]" : "translate-y-0"
                     )}
                 >
