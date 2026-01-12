@@ -65,7 +65,7 @@ const categories = [
 export function CategoryStrip() {
     return (
         <div className="bg-white border-b border-gray-100 md:hidden shadow-sm overflow-hidden">
-            <div className="flex items-center gap-5 px-4 py-2 overflow-x-auto no-scrollbar scroll-smooth">
+            <div className="flex items-center gap-4 px-4 py-2 overflow-x-auto no-scrollbar scroll-smooth">
                 {categories.map((cat) => (
                     <Link
                         key={cat.id}
