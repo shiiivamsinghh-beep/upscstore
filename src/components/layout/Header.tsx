@@ -254,90 +254,90 @@ export function Header() {
             </div>
 
             {/* VIEW C: INDEPENDENT CATEGORY STRIP - Sticky below header */}
+            {/* VIEW C: INDEPENDENT CATEGORY STRIP - Sticky below header */}
             {pathname === '/' && (
                 <div
                     className={cn(
-                        "fixed top-[60px] left-0 right-0 z-30 bg-white shadow-sm transition-transform duration-300 ease-in-out border-b border-gray-50",
+                        "fixed top-[60px] left-0 right-0 z-30 bg-white shadow-sm transition-transform duration-300 ease-in-out border-b border-gray-50 md:hidden",
                         (scrollDirection === 'down' && !isSearchOpen) ? "-translate-y-[140%]" : "translate-y-0"
                     )}
                 >
                     <CategoryStrip />
                 </div>
             )}
-        </div >
 
-            {/* --- MOBILE DRAWER (Branded) --- */ }
-    {
-        isMobileMenuOpen && (
-            <div className="fixed inset-0 z-[60] md:hidden">
-                <div
-                    className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                />
-                <div className="absolute top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white text-slate-900 shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
-                    {/* Drawer Header */}
-                    <div className="bg-[#0f172a] text-white p-6 relative overflow-hidden">
-                        <div className="relative z-10 flex flex-col gap-4">
-                            <div className="flex items-center justify-between">
-                                <div className="bg-white/10 p-2 rounded-full backdrop-blur-md">
-                                    <User className="h-6 w-6 text-amber-400" />
+            {/* --- MOBILE DRAWER (Branded) --- */}
+            {
+                isMobileMenuOpen && (
+                    <div className="fixed inset-0 z-[60] md:hidden">
+                        <div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        />
+                        <div className="absolute top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white text-slate-900 shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
+                            {/* Drawer Header */}
+                            <div className="bg-[#0f172a] text-white p-6 relative overflow-hidden">
+                                <div className="relative z-10 flex flex-col gap-4">
+                                    <div className="flex items-center justify-between">
+                                        <div className="bg-white/10 p-2 rounded-full backdrop-blur-md">
+                                            <User className="h-6 w-6 text-amber-400" />
+                                        </div>
+                                        <button onClick={() => setIsMobileMenuOpen(false)} className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors">
+                                            <X className="h-5 w-5" />
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-bold font-heading">Welcome, Aspirant</h3>
+                                        <p className="text-sm text-slate-400">Login to track your progress</p>
+                                    </div>
+                                    <button className="w-full bg-amber-500 hover:bg-amber-600 text-[#0f172a] font-bold py-2.5 rounded-lg text-sm transition-colors shadow-lg shadow-amber-500/20">
+                                        Login / Sign Up
+                                    </button>
                                 </div>
-                                <button onClick={() => setIsMobileMenuOpen(false)} className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors">
-                                    <X className="h-5 w-5" />
-                                </button>
+                                {/* Decorative Circle */}
+                                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
                             </div>
-                            <div>
-                                <h3 className="text-xl font-bold font-heading">Welcome, Aspirant</h3>
-                                <p className="text-sm text-slate-400">Login to track your progress</p>
+
+                            {/* Drawer Content */}
+                            <nav className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-1">
+                                <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Browse Syllabus</div>
+
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className="flex items-center justify-between py-3.5 border-b border-slate-50 text-slate-700 font-medium hover:text-amber-600 hover:pl-2 transition-all group"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {link.name}
+                                        <ChevronDown className="h-4 w-4 text-slate-300 -rotate-90 group-hover:text-amber-500 transition-colors" />
+                                    </Link>
+                                ))}
+                            </nav>
+
+                            {/* Drawer Footer */}
+                            <div className="p-4 bg-slate-50 border-t border-slate-100">
+                                <div className="grid grid-cols-2 gap-3">
+                                    <Link
+                                        href="/track"
+                                        className="flex flex-col items-center justify-center gap-2 bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors"
+                                    >
+                                        <Truck className="h-5 w-5 text-slate-500" />
+                                        <span className="text-xs font-bold text-slate-600">Track Order</span>
+                                    </Link>
+                                    <a
+                                        href="https://wa.me/919876543210"
+                                        className="flex flex-col items-center justify-center gap-2 bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors"
+                                    >
+                                        <Phone className="h-5 w-5 text-emerald-500" />
+                                        <span className="text-xs font-bold text-slate-600">Support</span>
+                                    </a>
+                                </div>
                             </div>
-                            <button className="w-full bg-amber-500 hover:bg-amber-600 text-[#0f172a] font-bold py-2.5 rounded-lg text-sm transition-colors shadow-lg shadow-amber-500/20">
-                                Login / Sign Up
-                            </button>
-                        </div>
-                        {/* Decorative Circle */}
-                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
-                    </div>
-
-                    {/* Drawer Content */}
-                    <nav className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-1">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Browse Syllabus</div>
-
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="flex items-center justify-between py-3.5 border-b border-slate-50 text-slate-700 font-medium hover:text-amber-600 hover:pl-2 transition-all group"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                {link.name}
-                                <ChevronDown className="h-4 w-4 text-slate-300 -rotate-90 group-hover:text-amber-500 transition-colors" />
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Drawer Footer */}
-                    <div className="p-4 bg-slate-50 border-t border-slate-100">
-                        <div className="grid grid-cols-2 gap-3">
-                            <Link
-                                href="/track"
-                                className="flex flex-col items-center justify-center gap-2 bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors"
-                            >
-                                <Truck className="h-5 w-5 text-slate-500" />
-                                <span className="text-xs font-bold text-slate-600">Track Order</span>
-                            </Link>
-                            <a
-                                href="https://wa.me/919876543210"
-                                className="flex flex-col items-center justify-center gap-2 bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors"
-                            >
-                                <Phone className="h-5 w-5 text-emerald-500" />
-                                <span className="text-xs font-bold text-slate-600">Support</span>
-                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        )
-    }
+                )
+            }
         </>
     );
 }
