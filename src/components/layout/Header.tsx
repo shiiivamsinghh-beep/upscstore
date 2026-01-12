@@ -221,7 +221,7 @@ export function Header() {
                         (scrollDirection === 'down' || isSearchOpen) ? "translate-y-0" : "-translate-y-full"
                     )}
                 >
-                    <div className="w-full h-[52px] flex items-center gap-2 px-3">
+                    <div className="w-full h-[60px] pt-2 flex items-center gap-2 px-3">
                         {isSearchOpen ? (
                             <button onClick={() => setIsSearchOpen(false)} className="p-1 -ml-1 text-slate-700 shrink-0">
                                 <ArrowLeft className="h-5 w-5" />
