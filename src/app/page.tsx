@@ -4,6 +4,7 @@ import { Product } from '@/types/product';
 import { HeroSection } from '@/components/home/HeroSection';
 import { FeaturesSection } from '@/components/home/FeaturesSection';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
+import { InstituteStrip } from '@/components/home/InstituteStrip';
 import { ProductGrid } from '@/components/home/ProductGrid';
 
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -34,6 +35,8 @@ export default async function Home(props: { searchParams: Promise<{ category?: s
       <FeaturesSection />
 
       <CategoryGrid />
+
+      <InstituteStrip />
 
       <ProductGrid
         title="Trending Materials"
