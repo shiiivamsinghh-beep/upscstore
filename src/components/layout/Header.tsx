@@ -222,6 +222,9 @@ export function Header() {
                         scrollDirection === 'down' ? "translate-y-0" : "-translate-y-full"
                     )}
                 >
+                    <button onClick={() => setIsMobileMenuOpen(true)} className="p-1 -ml-1 text-slate-700">
+                        <Menu className="h-6 w-6" />
+                    </button>
                     <form onSubmit={handleSearch} className="relative flex-1">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
