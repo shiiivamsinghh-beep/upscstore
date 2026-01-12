@@ -202,7 +202,7 @@ export function Header() {
                             <button className="text-slate-700" onClick={() => setIsSearchOpen(true)}>
                                 <Search className="h-5 w-5" />
                             </button>
-                            <Link href="/cart" className="relative">
+                            <Link href="/cart" className="relative invisible">
                                 <ShoppingCart className="h-5 w-5 text-slate-700" />
                                 <span className="absolute -top-1.5 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white ring-1 ring-white">
                                     <CartCounter />
@@ -242,7 +242,7 @@ export function Header() {
                                 />
                             </div>
                         </form>
-                        <Link href="/cart" className="relative p-2 shrink-0">
+                        <Link href="/cart" className="relative p-2 shrink-0 invisible">
                             <ShoppingCart className="h-5 w-5 text-slate-700" />
                             <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white shadow-sm ring-2 ring-white">
                                 <CartCounter />
