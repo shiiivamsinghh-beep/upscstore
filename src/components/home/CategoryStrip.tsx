@@ -65,17 +65,17 @@ const categories = [
 export function CategoryStrip() {
     return (
         <div className="bg-white border-b border-gray-100 md:hidden shadow-sm overflow-hidden">
-            <div className="flex items-center gap-4 px-4 py-2 overflow-x-auto no-scrollbar scroll-smooth">
+            <div className="flex items-center gap-3 px-3 py-3 overflow-x-auto no-scrollbar scroll-smooth">
                 {categories.map((cat) => (
                     <Link
                         key={cat.id}
                         href={cat.href}
-                        className="flex flex-col items-center gap-1.5 min-w-[70px] shrink-0 group"
+                        className="flex flex-col items-center gap-2 min-w-[70px] shrink-0 group"
                     >
-                        <div className={`w-9 h-9 rounded-full ${cat.color} flex items-center justify-center transition-transform group-active:scale-95`}>
+                        <div className={`w-12 h-12 rounded-[18px] ${cat.color} flex items-center justify-center transition-transform group-active:scale-95 shadow-sm`}>
                             <cat.icon className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-semibold text-slate-700 text-center leading-tight line-clamp-2">
+                        <span className="text-[10px] font-bold text-slate-600 text-center leading-tight line-clamp-2 tracking-wide">
                             {cat.name}
                         </span>
                     </Link>

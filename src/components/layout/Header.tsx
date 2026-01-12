@@ -176,7 +176,7 @@ export function Header() {
 
             {/* --- MOBILE HEADER SYSTEM (md:hidden) --- */}
             {/* Moved outside the main wrapper to escape the parent's transform context, ensuring fixed positioning works relative to viewport */}
-            <div className="md:hidden h-[108px]">
+            <div className="md:hidden h-[154px]">
 
                 {/* VIEW A: DEFAULT (Brand + Categories) - Visible on UP */}
                 <div
