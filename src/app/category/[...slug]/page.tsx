@@ -229,8 +229,8 @@ export default async function CategoryPage(props: PageProps) {
                     {config && <config.icon className="h-48 w-48 md:h-64 md:w-64 rotate-12" />}
                 </div>
 
-                <div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
-                    <Link href="/categories" className="inline-flex items-center text-xs md:text-sm text-white/70 hover:text-white mb-6 md:mb-8 transition-colors group">
+                <div className="container mx-auto px-4 py-4 md:py-12 relative z-10">
+                    <Link href="/categories" className="inline-flex items-center text-xs md:text-sm text-white/70 hover:text-white mb-2 md:mb-8 transition-colors group">
                         <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
                         Back to Categories
                     </Link>
@@ -238,14 +238,14 @@ export default async function CategoryPage(props: PageProps) {
                     <div className="flex items-center gap-4 md:gap-6">
                         {config ? (
                             <>
-                                <div className="h-14 w-14 md:h-20 md:w-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg border border-white/10 shrink-0">
-                                    <config.icon className="h-7 w-7 md:h-10 md:w-10 text-white" />
+                                <div className="h-10 w-10 md:h-20 md:w-20 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg border border-white/10 shrink-0">
+                                    <config.icon className="h-5 w-5 md:h-10 md:w-10 text-white" />
                                 </div>
                                 <div>
-                                    <h1 className="text-2xl md:text-4xl font-bold font-heading mb-1 md:mb-2 tracking-tight">
+                                    <h1 className="text-xl md:text-4xl font-bold font-heading mb-1 md:mb-2 tracking-tight">
                                         {config.name}
                                     </h1>
-                                    <p className="text-sm md:text-lg text-white/80 max-w-xl leading-snug">
+                                    <p className="text-xs md:text-lg text-white/80 max-w-xl leading-snug line-clamp-2 md:line-clamp-none">
                                         {config.description}
                                     </p>
                                 </div>
