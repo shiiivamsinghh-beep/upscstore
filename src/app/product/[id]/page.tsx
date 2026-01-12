@@ -20,7 +20,7 @@ interface PageProps {
 const getProduct = cache(async (id: string) => {
     const { data: product } = await supabase
         .from('products')
-        .select('id, title, description, institute, price, originalPrice:compare_at_price, category, image, rating, reviews, isBestSeller')
+        .select('id, title, description, institute, price, originalPrice:original_price, category, image, rating, reviews, isBestSeller:is_best_seller')
         .eq('id', id)
         .single();
 
