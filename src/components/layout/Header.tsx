@@ -147,12 +147,12 @@ export function Header() {
                     <div
                         className={cn(
                             "fixed top-0 left-0 right-0 z-40 bg-white transition-all duration-300 ease-in-out shadow-sm",
-                            scrollDirection === 'down' ? "-translate-y-full opacity-0 invisible" : "translate-y-0 opacity-100 visible"
+                            scrollDirection === 'down' ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
                         )}
                     >
                         {/* Brand Row */}
                         <div className="h-14 px-4 flex items-center justify-between border-b border-gray-50">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 shrink-0">
                                 <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-700">
                                     <Menu className="h-6 w-6" />
                                 </button>
@@ -160,7 +160,7 @@ export function Header() {
                                     <div className="bg-[#0f172a] p-1.5 rounded-lg">
                                         <BookOpen className="h-4 w-4 text-white" />
                                     </div>
-                                    <span className="text-lg font-bold text-[#0f172a] font-heading">UPSC Store</span>
+                                    <span className="text-lg font-bold text-[#0f172a] font-heading whitespace-nowrap">UPSC Store</span>
                                 </Link>
                             </div>
                             <div className="flex items-center gap-3">
