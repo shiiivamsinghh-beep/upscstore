@@ -116,11 +116,11 @@ export default function InstitutesPage() {
                             className={`group relative overflow-hidden bg-white p-2 md:p-6 rounded-xl md:rounded-2xl border ${inst.borderColor} shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block`}
                         >
                             <div className="flex items-start justify-between mb-2 md:mb-6">
-                                <div className={`w-10 h-10 md:w-16 md:h-16 rounded-lg md:rounded-xl flex items-center justify-center bg-white border border-slate-100 p-1 md:p-2 transition-transform group-hover:scale-105 overflow-hidden relative`}>
+                                <div className={`w-14 h-14 md:w-20 md:h-20 rounded-lg md:rounded-xl flex items-center justify-center bg-white border border-slate-100 transition-transform group-hover:scale-105 overflow-hidden relative`}>
                                     <InstituteLogo
                                         src={inst.logoUrl}
                                         alt={`${inst.name} Logo`}
-                                        fallback={<inst.icon className={`h-5 w-5 md:h-7 md:w-7 ${inst.color}`} />}
+                                        fallback={<inst.icon className={`h-8 w-8 md:h-10 md:w-10 ${inst.color}`} />}
                                     />
                                 </div>
                                 <div className="hidden md:flex h-8 w-8 rounded-full bg-slate-50 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity -mr-2">
