@@ -8,6 +8,7 @@ import { ProductInfo } from '@/components/products/ProductInfo';
 import { supabase } from '@/lib/supabase';
 import { Product } from '@/types/product';
 import { Metadata } from 'next';
+import { cache } from 'react';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -15,13 +16,20 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-    const params = await props.params;
+// Cached data fetcher to deduplicate requests
+const getProduct = cache(async (id: string) => {
     const { data: product } = await supabase
         .from('products')
-        .select('title, description, image')
-        .eq('id', params.id)
+        .select('id, title, description, institute, price, originalPrice:compare_at_price, category, image, rating, reviews, isBestSeller')
+        .eq('id', id)
         .single();
+
+    return product as unknown as Product;
+});
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+    const params = await props.params;
+    const product = await getProduct(params.id);
 
     if (!product) {
         return {
@@ -40,18 +48,11 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function ProductPage(props: PageProps) {
     const params = await props.params;
+    const product = await getProduct(params.id);
 
-    const { data: productData, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('id', params.id)
-        .single();
-
-    if (error || !productData) {
+    if (!product) {
         notFound();
     }
-
-    const product = productData as unknown as Product;
 
     return (
         <div className="bg-white min-h-screen pb-24 md:pb-12">
