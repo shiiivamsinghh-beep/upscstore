@@ -266,6 +266,18 @@ export function Header() {
                 </div>
             )}
 
+            {/* VIEW D: STATIC CART OVERLAY - Always visible on mobile, independent of swap */}
+            <div className="fixed top-0 right-3 z-[51] h-[64px] flex items-center md:hidden pointer-events-none">
+                <div className="pointer-events-auto">
+                    <Link href="/cart" className="relative p-2 block">
+                        <ShoppingCart className="h-5 w-5 text-slate-700" />
+                        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white shadow-sm ring-2 ring-white">
+                            <CartCounter />
+                        </span>
+                    </Link>
+                </div>
+            </div>
+
             {/* --- MOBILE DRAWER (Branded) --- */}
             {
                 isMobileMenuOpen && (
